@@ -202,13 +202,45 @@
     </main>
 
     <script>
-    document.getElementById('surveyForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        document.getElementById('surveyForm').style.display = 'none';
-        document.getElementById('thankYou').style.display = 'block';
-        document.getElementById('thankYou').scrollIntoView({ behavior: 'smooth' });
-    });
-    </script>
+document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const data = {
+        prediction_accurate: document.getElementById('prediction_accurate').value,
+        chat_helpful: document.getElementById('chat_helpful').value,
+        recommend: document.getElementById('recommend').value,
+        ease_of_use: document.getElementById('ease_of_use').value,
+        extra_sleep: document.getElementById('extra_sleep').value,
+        extra_exercise: document.getElementById('extra_exercise').value,
+        extra_stress: document.getElementById('extra_stress').value,
+        extra_social: document.getElementById('extra_social').value,
+        extra_professional_help: document.getElementById('extra_professional_help').value,
+        extra_lonely: document.getElementById('extra_lonely').value,
+        extra_academic: document.getElementById('extra_academic').value,
+        extra_features: document.getElementById('extra_features').value,
+        extra_comments: document.getElementById('extra_comments').value
+    };
+
+    try {
+        const response = await fetch('/survey', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            document.getElementById('surveyForm').style.display = 'none';
+            document.getElementById('thankYou').style.display = 'block';
+            document.getElementById('thankYou').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('Failed to submit survey. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Network error. Please try again.');
+    }
+});
+</script>
 
     <script>
     function openCrisisModal() {
