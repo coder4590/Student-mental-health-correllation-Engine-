@@ -30,8 +30,8 @@ model = get_model()
 
 
 @app.get("/")
-def root():
-    return {"message": "MindGuard API is running", "status": "healthy"}
+def serve_frontend():
+    return FileResponse(os.path.join(ROOT_DIR, "frontend", "index.html"))
 
 
 @app.get("/health", response_model=HealthResponse)
