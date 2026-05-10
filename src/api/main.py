@@ -26,6 +26,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/assessment")
+def serve_assessment():
+    return FileResponse(os.path.join(ROOT_DIR, "frontend", "assessment.html"))
+
+@app.get("/chatbot")
+def serve_chatbot():
+    return FileResponse(os.path.join(ROOT_DIR, "frontend", "chatbot.html"))
+
 model = get_model()
 
 
