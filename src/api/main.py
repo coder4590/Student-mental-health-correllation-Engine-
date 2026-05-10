@@ -133,11 +133,7 @@ def chat_endpoint(data: ChatInput):
     return chat(data.message)
 
 
-DB_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-    "data",
-    "survey.db"
-)
+DB_PATH = os.path.join(ROOT_DIR, "data", "survey.db")
 
 def init_survey_db():
     conn = sqlite3.connect(DB_PATH)
