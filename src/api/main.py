@@ -134,6 +134,8 @@ def chat_endpoint(data: ChatInput):
 
 
 DB_PATH = os.path.join(ROOT_DIR, "data", "survey.db")
+print(f"DEBUG: DB_PATH = {DB_PATH}")
+print(f"DEBUG: ROOT_DIR = {ROOT_DIR}")
 
 def init_survey_db():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
