@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindGuard — Your Mental Health Companion</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<script>
+function openCrisisModal() {
+    const existing = document.querySelector('.modal-overlay');
+    if (existing) existing.remove();
+
+    const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    
+    const box = document.createElement('div');
+    box.className = 'modal-box';
+    box.innerHTML = `
+        <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕</button>
+        <div class="modal-icon">🆘</div>
+        <h2>Crisis Support</h2>
+        <p>Free, confidential help is available right now. You are not alone.</p>
+        <div class="crisis-numbers">
+            <div class="crisis-number-card">
+                <strong>Kaan Pete Roi</strong>
+                <div class="number">01779554391</div>
+            </div>
+            <div class="crisis-number-card">
+                <strong>National Helpline</strong>
+                <div class="number">999</div>
+            </div>
+        </div>
+        ${!isMobile ? '<p class="desktop-warning">⚠️ On desktop? Dial the numbers above on your phone.</p>' : ''}
+        <div class="modal-buttons">
+            ${isMobile ? '<a href="tel:01779554391" class="btn-call">📞 Call Now</a>' : ''}
+            <button class="btn-close-modal" onclick="this.closest(\'.modal-overlay\').remove()">Close</button>
+        </div>
+    `;
+    
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.remove();
+    });
+}
+</script>
+
+<body>
+    <!-- Emergency Button -->
+    <a class="emergency-btn" title="Crisis Helpline" onclick="openCrisisModal(); return false;" style="cursor:pointer;">
+        <span class="pulse"></span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        <span>Crisis Help</span>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>MindGuard</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="assessment.html">Assessment</a>
+                <a href="chatbot.html">AI Companion</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Powered by Machine Learning
+            </div>
+            <h1>Your Mental Health<span class="gradient-text"> Companion</span></h1>
+            <p class="hero-subtitle">
+                Take a confidential assessment, understand your mental health patterns, 
+                and chat with an AI companion trained to support university students.
+            </p>
+            <div class="hero-buttons">
+                <a href="assessment.html" class="btn-primary">
+                    Start Assessment
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="chatbot.html" class="btn-secondary">
+                    Talk to AI Companion
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <div class="card-icon">🧠</div>
+                <div class="card-text">Personalized Insights</div>
+            </div>
+            <div class="floating-card card-2">
+                <div class="card-icon">💬</div>
+                <div class="card-text">24/7 AI Support</div>
+            </div>
+            <div class="floating-card card-3">
+                <div class="card-icon">🔒</div>
+                <div class="card-text">100% Confidential</div>
+            </div>
+            <div class="hero-circle"></div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <h2>How MindGuard Helps</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3>Comprehensive Assessment</h3>
+                <p>19 scientifically-validated questions covering sleep, academic pressure, financial stress, and more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Analysis</h3>
+                <p>Machine learning model trained on real student data delivers personalized risk assessment.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💊</div>
+                <h3>Actionable Recommendations</h3>
+                <p>Get specific, evidence-based suggestions for every aspect of your mental health.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧑‍⚕️</div>
+                <h3>Crisis Support</h3>
+                <p>One-click access to professional helplines. Kaan Pete Roi and National Mental Health support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stat-item">
+            <span class="stat-number">19</span>
+            <span class="stat-label">Health Indicators</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">AI Models</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Confidential</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-text">MindGuard</span>
+                <p>Student Mental Health Correlation Engine</p>
+            </div>
+            <div class="footer-links">
+                <a href="assessment.html">Assessment</a>
+                <a href="chatbot.html">AI Companion</a>
+                <a href="#crisis">Crisis Resources</a>
+            </div>
+            <div class="footer-crisis">
+                <strong>Crisis Helpline</strong>
+                <p>Kaan Pete Roi: 01779554391</p>
+                <p>National Helpline: 999</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MindGuard. Built for university students.</p>
+        </div>
+    </footer>
+</body>
+</html>

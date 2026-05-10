@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment — MindGuard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<script>
+function openCrisisModal() {
+    const existing = document.querySelector('.modal-overlay');
+    if (existing) existing.remove();
+
+    const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    
+    const box = document.createElement('div');
+    box.className = 'modal-box';
+    box.innerHTML = `
+        <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕</button>
+        <div class="modal-icon">🆘</div>
+        <h2>Crisis Support</h2>
+        <p>Free, confidential help is available right now. You are not alone.</p>
+        <div class="crisis-numbers">
+            <div class="crisis-number-card">
+                <strong>Kaan Pete Roi</strong>
+                <div class="number">01779554391</div>
+            </div>
+            <div class="crisis-number-card">
+                <strong>National Helpline</strong>
+                <div class="number">999</div>
+            </div>
+        </div>
+        ${!isMobile ? '<p class="desktop-warning">⚠️ On desktop? Dial the numbers above on your phone.</p>' : ''}
+        <div class="modal-buttons">
+            ${isMobile ? '<a href="tel:01779554391" class="btn-call">📞 Call Now</a>' : ''}
+            <button class="btn-close-modal" onclick="this.closest(\'.modal-overlay\').remove()">Close</button>
+        </div>
+    `;
+    
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.remove();
+    });
+}
+</script>
+
+<body>
+    <!-- Emergency Button -->
+    <a class="emergency-btn" title="Crisis Helpline" onclick="openCrisisModal(); return false;" style="cursor:pointer;">
+        <span class="pulse"></span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        <span>Crisis Help</span>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>MindGuard</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="assessment.html" class="active">Assessment</a>
+                <a href="chatbot.html">AI Companion</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Assessment Form -->
+    <main class="assessment-container">
+        <div class="assessment-header">
+            <h1>Mental Health Assessment</h1>
+            <p>Answer all questions honestly. Your responses are completely confidential.</p>
+        </div>
+
+        <form id="assessmentForm" class="assessment-form">
+            <!-- Section 1: Demographics -->
+            <div class="form-section">
+                <h2 class="section-title">📋 Demographics</h2>
+                
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" min="15" max="50" required placeholder="Enter your age">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="relationship_status">Relationship Status</label>
+                    <select id="relationship_status" name="relationship_status" required>
+                        <option value="">Select status</option>
+                        <option value="Single">Single</option>
+                        <option value="In a Relationship">In a Relationship</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 2: Academic -->
+            <div class="form-section">
+                <h2 class="section-title">📚 Academic Life</h2>
+
+                <div class="form-group">
+                    <label for="academic_status">Academic Year</label>
+                    <select id="academic_status" name="academic_status" required>
+                        <option value="">Select year</option>
+                        <option value="1 Year">1st Year</option>
+                        <option value="2 Year">2nd Year</option>
+                        <option value="3 Year">3rd Year</option>
+                        <option value="4 Year">4th Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="work_and_study">Do you work while studying?</label>
+                    <select id="work_and_study" name="work_and_study" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="academic_work_demands">Do you feel overwhelmed by academic demands?</label>
+                    <select id="academic_work_demands" name="academic_work_demands" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 3: Living & Financial -->
+            <div class="form-section">
+                <h2 class="section-title">🏠 Living & Finances</h2>
+
+                <div class="form-group">
+                    <label for="residential_area">Where do you live?</label>
+                    <select id="residential_area" name="residential_area" required>
+                        <option value="">Select option</option>
+                        <option value="Hall">University Hall</option>
+                        <option value="Outside Hall">Private Housing</option>
+                        <option value="With family">With Family</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="living_environment_satisfaction">Are you satisfied with your living environment?</label>
+                    <select id="living_environment_satisfaction" name="living_environment_satisfaction" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="social_economic_status">Socio-Economic Status</label>
+                    <select id="social_economic_status" name="social_economic_status" required>
+                        <option value="">Select status</option>
+                        <option value="Lower">Lower</option>
+                        <option value="Lower-Middle">Lower-Middle</option>
+                        <option value="Middle">Middle</option>
+                        <option value="Upper-Middle">Upper-Middle</option>
+                        <option value="Upper">Upper</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="financial_pressure">Are you under financial pressure?</label>
+                    <select id="financial_pressure" name="financial_pressure" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="has_debt">Do you have debt?</label>
+                    <select id="has_debt" name="has_debt" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 4: Lifestyle -->
+            <div class="form-section">
+                <h2 class="section-title">💪 Lifestyle & Health</h2>
+
+                <div class="form-group">
+                    <label for="sleep_duration_hours">Average Sleep Duration</label>
+                    <select id="sleep_duration_hours" name="sleep_duration_hours" required>
+                        <option value="">Select duration</option>
+                        <option value="Below 5 Hours">Below 5 Hours</option>
+                        <option value="5 Hours">5 Hours</option>
+                        <option value="6 Hours">6 Hours</option>
+                        <option value="7 Hours">7 Hours</option>
+                        <option value="8 Hours">8 Hours</option>
+                        <option value="More than 8 hours">More than 8 hours</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="social_media_hours_daily">Daily Social Media Use</label>
+                    <select id="social_media_hours_daily" name="social_media_hours_daily" required>
+                        <option value="">Select range</option>
+                        <option value="Less than 2 hours">Less than 2 hours</option>
+                        <option value="2–4 hours a day">2–4 hours a day</option>
+                        <option value="5–7 hours a day">5–7 hours a day</option>
+                        <option value="8–10 hours a day">8–10 hours a day</option>
+                        <option value="More than 10 hours a day">More than 10 hours a day</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="physical_activity">Do you exercise regularly?</label>
+                    <select id="physical_activity" name="physical_activity" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="chronic_illness">Do you have a chronic illness?</label>
+                    <select id="chronic_illness" name="chronic_illness" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="medication">Are you on regular medication?</label>
+                    <select id="medication" name="medication" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 5: Mental & Emotional -->
+            <div class="form-section">
+                <h2 class="section-title">🧠 Mental & Emotional Health</h2>
+
+                <div class="form-group">
+                    <label for="recent_loss">Have you experienced a recent loss?</label>
+                    <select id="recent_loss" name="recent_loss" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="smoking">Do you smoke?</label>
+                    <select id="smoking" name="smoking" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="alcohol">Do you consume alcohol?</label>
+                    <select id="alcohol" name="alcohol" required>
+                        <option value="">Select option</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-submit">
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    <span id="submitText">Get Your Results</span>
+                    <span id="submitLoader" class="loader" style="display:none;"></span>
+                </button>
+            </div>
+        </form>
+
+        <!-- Results Section (Hidden by default) -->
+        <div id="resultsSection" class="results-section" style="display:none;">
+            <div class="results-card">
+                <div class="result-header">
+                    <h2>Your Assessment Results</h2>
+                </div>
+                <div class="result-score">
+                    <span class="score-label">Depression Risk Score</span>
+                    <span class="score-value" id="scoreValue">--</span>
+                </div>
+                <div class="result-badge" id="resultBadge">
+                    <span id="riskLevel">--</span>
+                </div>
+                <div class="result-message" id="resultMessage"></div>
+                <div class="result-insights" id="resultInsights"></div>
+            </div>
+            <button onclick="location.reload()" class="btn-secondary" style="margin-top:20px;">Take Assessment Again</button>
+        </div>
+    </main>
+
+    <script src="js/assessment.js"></script>
+</body>
+</html>
