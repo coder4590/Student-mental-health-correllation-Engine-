@@ -2,7 +2,7 @@
 // MINDGUARD — AI Chatbot Handler
 // ============================================================
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = '';
 const chatMessages = document.getElementById('chatMessages');
 const chatInput = document.getElementById('chatInput');
 const sendBtn = document.getElementById('sendBtn');

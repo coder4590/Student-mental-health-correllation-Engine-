@@ -2,7 +2,7 @@
 // MINDGUARD — Assessment Form Handler
 // ============================================================
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = '';
 
 // ---------- Progress Bar ----------
 const totalFields = 19;
