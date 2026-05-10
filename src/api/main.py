@@ -83,6 +83,10 @@ from .schemas import ChatInput, ChatResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
+import sqlite3
+from datetime import datetime
+from pydantic import BaseModel
+
 
 app = FastAPI(title="MindGuard API", description="Student Mental Health Screening Tool")
 
@@ -127,6 +131,77 @@ def predict(data: StudentInput):
 @app.post("/chat", response_model=ChatResponse)
 def chat_endpoint(data: ChatInput):
     return chat(data.message)
+
+
+DB_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    "data",
+    "survey.db"
+)
+
+def init_survey_db():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS survey_responses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            prediction_accurate TEXT,
+            chat_helpful TEXT,
+            recommend TEXT,
+            ease_of_use TEXT,
+            extra_sleep TEXT,
+            extra_exercise TEXT,
+            extra_stress TEXT,
+            extra_social TEXT,
+            extra_professional_help TEXT,
+            extra_lonely TEXT,
+            extra_academic TEXT,
+            extra_features TEXT,
+            extra_comments TEXT,
+            submitted_at TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_survey_db()
+
+class SurveyInput(BaseModel):
+    prediction_accurate: str
+    chat_helpful: str
+    recommend: str
+    ease_of_use: str
+    extra_sleep: str = ""
+    extra_exercise: str = ""
+    extra_stress: str = ""
+    extra_social: str = ""
+    extra_professional_help: str = ""
+    extra_lonely: str = ""
+    extra_academic: str = ""
+    extra_features: str = ""
+    extra_comments: str = ""
+
+@app.post("/survey")
+def submit_survey(data: SurveyInput):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO survey_responses 
+        (prediction_accurate, chat_helpful, recommend, ease_of_use,
+         extra_sleep, extra_exercise, extra_stress, extra_social,
+         extra_professional_help, extra_lonely, extra_academic,
+         extra_features, extra_comments, submitted_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        data.prediction_accurate, data.chat_helpful, data.recommend, data.ease_of_use,
+        data.extra_sleep, data.extra_exercise, data.extra_stress, data.extra_social,
+        data.extra_professional_help, data.extra_lonely, data.extra_academic,
+        data.extra_features, data.extra_comments,
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    ))
+    conn.commit()
+    conn.close()
+    return {"status": "success", "message": "Survey submitted successfully"}
 
 # Frontend — DEAD LAST, serves everything
 app.mount("/", StaticFiles(directory=os.path.join(ROOT_DIR, "frontend"), html=True), name="frontend")
