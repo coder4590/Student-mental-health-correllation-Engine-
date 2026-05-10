@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey — MindGuard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a class="emergency-btn" title="Crisis Helpline" onclick="openCrisisModal(); return false;" style="cursor:pointer;">
+        <span class="pulse"></span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        <span>Crisis Help</span>
+    </a>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>MindGuard</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="assessment.html">Assessment</a>
+                <a href="chatbot.html">AI Companion</a>
+                <a href="survey.html" class="active">Survey</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="assessment-container">
+        <div class="assessment-header">
+            <h1>Help Us Improve</h1>
+            <p>Your feedback helps make MindGuard smarter and more accurate for everyone.</p>
+        </div>
+
+        <form id="surveyForm" class="assessment-form">
+            
+            <!-- Section 1: Rate Your Experience -->
+            <div class="form-section">
+                <h2 class="section-title">📊 Rate Your Experience</h2>
+                
+                <div class="form-group">
+                    <label>1. Was the prediction accurate for you?</label>
+                    <select id="prediction_accurate" required>
+                        <option value="">Select</option>
+                        <option value="Yes">Yes, it was accurate</option>
+                        <option value="Somewhat">Somewhat accurate</option>
+                        <option value="No">No, it was not accurate</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>2. How helpful was the AI Companion chat?</label>
+                    <select id="chat_helpful" required>
+                        <option value="">Select</option>
+                        <option value="Very">Very helpful</option>
+                        <option value="Somewhat">Somewhat helpful</option>
+                        <option value="Not">Not helpful</option>
+                        <option value="DidntUse">Didn't use it</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>3. Would you recommend MindGuard to a friend?</label>
+                    <select id="recommend" required>
+                        <option value="">Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="Maybe">Maybe</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>4. How easy was the assessment to complete?</label>
+                    <select id="ease_of_use" required>
+                        <option value="">Select</option>
+                        <option value="Very easy">Very easy</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Neutral">Neutral</option>
+                        <option value="Difficult">Difficult</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 2: Lifestyle & Health -->
+            <div class="form-section">
+                <h2 class="section-title">🩺 Lifestyle & Health (Optional)</h2>
+                <p style="color:var(--text-secondary);font-size:13px;margin-bottom:20px;">This data helps train future models. All responses are anonymous.</p>
+
+                <div class="form-group">
+                    <label>5. How many hours do you sleep on average?</label>
+                    <select id="extra_sleep">
+                        <option value="">Prefer not to say</option>
+                        <option value="Below 5 Hours">Below 5 Hours</option>
+                        <option value="5 Hours">5 Hours</option>
+                        <option value="6 Hours">6 Hours</option>
+                        <option value="7 Hours">7 Hours</option>
+                        <option value="8 Hours">8 Hours</option>
+                        <option value="More than 8 hours">More than 8 hours</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>6. How often do you exercise?</label>
+                    <select id="extra_exercise">
+                        <option value="">Prefer not to say</option>
+                        <option value="Never">Never</option>
+                        <option value="Rarely">1-2 times a week</option>
+                        <option value="Often">3-5 times a week</option>
+                        <option value="Daily">Daily</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>7. How would you rate your current stress level?</label>
+                    <select id="extra_stress">
+                        <option value="">Prefer not to say</option>
+                        <option value="Low">Low</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="High">High</option>
+                        <option value="Severe">Severe</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>8. How many hours do you spend on social media daily?</label>
+                    <select id="extra_social">
+                        <option value="">Prefer not to say</option>
+                        <option value="Less than 2 hours">Less than 2 hours</option>
+                        <option value="2-4 hours">2-4 hours</option>
+                        <option value="5-7 hours">5-7 hours</option>
+                        <option value="8-10 hours">8-10 hours</option>
+                        <option value="More than 10 hours">More than 10 hours</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>9. Have you ever sought professional mental health support?</label>
+                    <select id="extra_professional_help">
+                        <option value="">Prefer not to say</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>10. How often do you feel lonely or isolated?</label>
+                    <select id="extra_lonely">
+                        <option value="">Prefer not to say</option>
+                        <option value="Never">Never</option>
+                        <option value="Rarely">Rarely</option>
+                        <option value="Sometimes">Sometimes</option>
+                        <option value="Often">Often</option>
+                        <option value="Always">Always</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>11. How would you rate your academic pressure?</label>
+                    <select id="extra_academic">
+                        <option value="">Prefer not to say</option>
+                        <option value="Low">Low</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="High">High</option>
+                        <option value="Severe">Severe</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 3: Feedback -->
+            <div class="form-section">
+                <h2 class="section-title">💬 Feedback</h2>
+
+                <div class="form-group">
+                    <label>12. What features would you like to see added?</label>
+                    <textarea id="extra_features" rows="3" placeholder="Share your ideas..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>13. Any other comments or suggestions?</label>
+                    <textarea id="extra_comments" rows="4" placeholder="Share your thoughts..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-submit">
+                <button type="submit" class="btn-primary">Submit Feedback</button>
+            </div>
+        </form>
+
+        <div id="thankYou" style="display:none;text-align:center;padding:60px 20px;">
+            <div style="font-size:48px;margin-bottom:16px;">✅</div>
+            <h2>Thank You!</h2>
+            <p style="color:var(--text-secondary);">Your feedback helps make MindGuard better for everyone.</p>
+            <a href="index.html" class="btn-secondary" style="margin-top:24px;">Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('surveyForm').style.display = 'none';
+        document.getElementById('thankYou').style.display = 'block';
+        document.getElementById('thankYou').scrollIntoView({ behavior: 'smooth' });
+    });
+    </script>
+
+    <script>
+    function openCrisisModal() {
+        const existing = document.querySelector('.modal-overlay');
+        if (existing) existing.remove();
+        const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        const box = document.createElement('div');
+        box.className = 'modal-box';
+        box.innerHTML = `
+            <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕</button>
+            <div class="modal-icon">🆘</div>
+            <h2>Crisis Support</h2>
+            <p>Free, confidential help is available right now. You are not alone.</p>
+            <div class="crisis-numbers">
+                <div class="crisis-number-card"><strong>Kaan Pete Roi</strong><div class="number">01779554391</div></div>
+                <div class="crisis-number-card"><strong>National Helpline</strong><div class="number">999</div></div>
+            </div>
+            ${!isMobile ? '<p class="desktop-warning">⚠️ On desktop? Dial the numbers above on your phone.</p>' : ''}
+            <div class="modal-buttons">
+                ${isMobile ? '<a href="tel:01779554391" class="btn-call">📞 Call Now</a>' : ''}
+                <button class="btn-close-modal" onclick="this.closest(\'.modal-overlay\').remove()">Close</button>
+            </div>
+        `;
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+    }
+    </script>
+</body>
+</html>
