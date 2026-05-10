@@ -6,8 +6,17 @@ from .nlp_engine import generate_full_response
 from .chatbot import chat
 from .schemas import ChatInput, ChatResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
 
 app = FastAPI(title="MindGuard API", description="Student Mental Health Screening Tool")
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Mount frontend folder as static files
+app.mount("/frontend", StaticFiles(directory=os.path.join(ROOT_DIR, "frontend")), name="frontend")
+
 
 app.add_middleware(
     CORSMiddleware,
